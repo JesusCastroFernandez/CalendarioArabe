@@ -1,0 +1,33 @@
+IDENTIFICATION DIVISION.
+PROGRAM-ID. CalendarioArabe.
+
+DATA DIVISION.
+WORKING-STORAGE SECTION.
+01  fecha-deseada.
+    05  dia         PIC 99.
+    05  mes         PIC 99.
+    05  anio        PIC 9999.
+
+01  fecha-islamica.
+    05  dia-islamico    PIC 99.
+    05  mes-islamico    PIC 99.
+    05  anio-islamico   PIC 9999.
+
+PROCEDURE DIVISION.
+MAIN-PROCEDURE.
+    DISPLAY "Ingrese la fecha deseada (DD/MM/AAAA): "
+    ACCEPT dia, mes, anio
+
+    COMPUTE anio-diferencia = anio - 622
+
+    IF mes > 7 THEN
+        COMPUTE mes-islamico = mes - 7
+    ELSE
+        COMPUTE mes-islamico = mes + 5
+        COMPUTE anio-diferencia = anio-diferencia - 1
+    END-IF
+
+    COMPUTE dia-islamico = dia + ((mes-islamico-1) * 30)
+
+    DISPLAY "La fecha en el calendario islámico es: ", dia-islamico, "/", mes-islamico, "/", anio-diferencia
+    STOP RUN.
